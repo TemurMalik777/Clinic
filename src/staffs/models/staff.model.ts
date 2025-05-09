@@ -7,7 +7,7 @@ interface IStaffsCreationAttr {
   last_name: string;
   username: string;
   email: string;
-  password: string;
+  hashed_password: string;
   phone_number: string;
   role: Role;
 }
@@ -34,13 +34,13 @@ export class Staff extends Model<Staff, IStaffsCreationAttr> {
   declare email: string;
 
   @Column({ type: DataType.STRING })
-  declare password: string;
+  declare hashed_password: string;
 
   @Column({
     type: DataType.STRING,
     allowNull: true,
   })
-  declare refresh_token: string;
+  declare hashed_refresh_token: string;
 
   @Column({
     type: DataType.STRING,

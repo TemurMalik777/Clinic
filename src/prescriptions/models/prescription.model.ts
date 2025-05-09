@@ -1,4 +1,14 @@
-import { Column, DataType, Model, Table } from 'sequelize-typescript';
+import {
+  BelongsTo,
+  Column,
+  DataType,
+  ForeignKey,
+  Model,
+  Table,
+} from 'sequelize-typescript';
+import { Medication } from '../../medications/models/medication.model';
+import { Patient } from '../../patients/models/patient.model';
+import { Doctor } from '../../doctors/models/doctor.model';
 
 interface IPrescriptionsCreationAttr {
   doctor_id: number;
@@ -22,23 +32,33 @@ export class Prescription extends Model<
   })
   declare id: number;
 
+  @ForeignKey(() => Doctor)
   @Column({
     type: DataType.INTEGER,
     allowNull: false,
   })
   declare doctor_id: number;
+  @BelongsTo(() => Doctor)
+  doctor: Doctor;
 
+  @ForeignKey(() => Patient)
   @Column({
     type: DataType.INTEGER,
     allowNull: false,
   })
   declare patient_id: number;
+  
+  @BelongsTo(() => Patient)
+  patient: Patient;
 
+  @ForeignKey(() => Medication)
   @Column({
     type: DataType.INTEGER,
     allowNull: false,
   })
   declare medication_id: number;
+  @BelongsTo(() => Medication)
+  medication: Medication;
 
   @Column({
     type: DataType.STRING,

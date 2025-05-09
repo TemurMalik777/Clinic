@@ -1,4 +1,15 @@
-import { Model, Table, Column, DataType } from 'sequelize-typescript';
+import {
+  Model,
+  Table,
+  Column,
+  DataType,
+  ForeignKey,
+  BelongsTo,
+  HasMany,
+} from 'sequelize-typescript';
+import { Patient } from '../../patients/models/patient.model';
+import { Doctor } from '../../doctors/models/doctor.model';
+import { Medicalrecord } from '../../medicalrecords/models/medicalrecord.model';
 
 interface IAppointmentsCreationAttr {
   patient_id: number;
@@ -18,17 +29,24 @@ export class Appointment extends Model<Appointment, IAppointmentsCreationAttr> {
   })
   declare id: number;
 
+  @ForeignKey(() => Patient)
   @Column({
     type: DataType.INTEGER,
     allowNull: false,
   })
   declare patient_id: number;
 
+  @BelongsTo(() => Patient)
+  patient: Patient; 
+
+  @ForeignKey(() => Doctor)
   @Column({
     type: DataType.INTEGER,
     allowNull: false,
   })
   declare doctor_id: number;
+  @BelongsTo(() => Doctor)
+  doctor: Doctor;
 
   @Column({
     type: DataType.BIGINT,
@@ -53,4 +71,7 @@ export class Appointment extends Model<Appointment, IAppointmentsCreationAttr> {
     allowNull: false,
   })
   declare reason: number;
+
+  @HasMany(() => Medicalrecord)
+  medicalrecord: Medicalrecord[];
 }

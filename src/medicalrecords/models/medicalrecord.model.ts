@@ -5,6 +5,7 @@ import {
   Table,
   ForeignKey,
 } from 'sequelize-typescript';
+import { Appointment } from '../../appointments/models/appointment.model';
 
 interface IMedicalrecordsCreationAttr {
   appointment_id: number;
@@ -25,11 +26,13 @@ export class Medicalrecord extends Model<
   })
   declare id: number;
 
+  @ForeignKey(()=>Appointment)
   @Column({
     type: DataType.INTEGER,
     allowNull: false,
   })
   declare appointment_id: number;
+  appointmenst: Appointment
 
   @Column({
     type: DataType.TEXT,

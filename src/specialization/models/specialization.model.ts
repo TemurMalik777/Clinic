@@ -1,4 +1,5 @@
-import { Column, DataType, Model, Table } from 'sequelize-typescript';
+import { Column, DataType, HasMany, Model, Table } from 'sequelize-typescript';
+import { Doctor } from '../../doctors/models/doctor.model';
 
 interface ISpecializationCreationAttr {
   name: string;
@@ -28,4 +29,7 @@ export class Specialization extends Model<
     allowNull: false,
   })
   declare description: string;
+
+  @HasMany(()=>Doctor)
+  doctor: Doctor[]
 }

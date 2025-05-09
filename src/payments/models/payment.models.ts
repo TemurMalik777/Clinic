@@ -8,10 +8,9 @@ import {
   Table,
 } from 'sequelize-typescript';
 import { Patient } from '../../patients/models/patient.model';
-import { PricesService } from '../../prices_services/models/prices_service.model';
 
 interface IPaymentsCreationAttr {
-  patient_id: number;
+  patient_id_pay: number;
   amount: number;
   payments_date: number;
   payments_method: number;
@@ -30,11 +29,9 @@ export class Payment extends Model<Payment, IPaymentsCreationAttr> {
   @ForeignKey(() => Patient)
   @Column({
     type: DataType.INTEGER,
-    allowNull: false,
   })
   declare patient_id: number;
-  @BelongsTo(() => Patient)
-  patient: Patient;
+
 
   @Column({
     type: DataType.INTEGER,
@@ -60,6 +57,10 @@ export class Payment extends Model<Payment, IPaymentsCreationAttr> {
   })
   declare status: string;
 
-  // @HasMany(() => PricesService)
-  // pricesService: PricesService[];
+  // @HasMany(()=>PricesService)
+  // prices_servicesss: PricesService[]
+
+  
+  // @BelongsTo(() => Patient) // 'own' emas, 'patient' deb nomlang
+  // patient: Patient;
 }

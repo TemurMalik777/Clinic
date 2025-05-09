@@ -1,4 +1,5 @@
-import { Column, DataType, Model, Table } from 'sequelize-typescript';
+import { Column, DataType, HasMany, Model, Table } from 'sequelize-typescript';
+import { Prescription } from '../../prescriptions/models/prescription.model';
 
 interface IMedicationsCreationAttr {
   name: string;
@@ -32,4 +33,7 @@ export class Medication extends Model<Medication, IMedicationsCreationAttr> {
     allowNull: false,
   })
   declare description: string;
+
+  @HasMany(()=>Prescription)
+  prescription: Prescription[]
 }

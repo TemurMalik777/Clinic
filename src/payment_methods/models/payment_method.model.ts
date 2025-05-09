@@ -1,4 +1,5 @@
-import { Column, DataType, Model, Table } from 'sequelize-typescript';
+import { Column, DataType, HasMany, Model, Table } from 'sequelize-typescript';
+import { Payment } from '../../payments/models/payment.models';
 
 interface IPaymentsMethodCreationAttr {
   name: string;
@@ -28,4 +29,5 @@ export class PaymentMethod extends Model<
     allowNull: false,
   })
   declare description: string;
+
 }

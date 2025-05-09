@@ -2,6 +2,8 @@ import { ApiProperty } from '@nestjs/swagger';
 import { Table, Column, Model, DataType, HasMany } from 'sequelize-typescript';
 import { LabTest } from '../../lab_tests/models/lab_test.model';
 import { Payment } from '../../payments/models/payment.models';
+import { Prescription } from '../../prescriptions/models/prescription.model';
+import { Appointment } from '../../appointments/models/appointment.model';
 
 // type Enum = 'A+' | 'A-' | 'B+' | 'B-' | 'AB+' | 'AB-' | 'O+' | 'O-';
 
@@ -14,7 +16,7 @@ interface IPatientsCreationAttr {
   phone_number: string;
   is_active: string;
   boold_type: 'A+' | 'A-' | 'B+' | 'B-' | 'AB+' | 'AB-' | 'O+' | 'O-';
-  password: string;
+  hashed_password: string;
 }
 
 @Table({ tableName: 'patients' })
@@ -86,21 +88,27 @@ export class Patient extends Model<Patient, IPatientsCreationAttr> {
   @Column({
     type: DataType.STRING,
   })
-  declare password: string;
+  declare hashed_password: string;
 
   @Column({
     type: DataType.STRING,
+    allowNull: true,
   })
-  declare refresh_token: string;
+  declare hashed_refresh_token: string;
+
+  // @Column({
+  //   type: DataType.STRING,
+  // })
+  // declare refresh_token: string;
 
   @Column({
     type: DataType.STRING,
   })
   declare active_link: string;
 
-  @HasMany(() => LabTest)
-  labTest: LabTest[];
+  @HasMany(() => Payment)
+  payments: Payment[];
 
-  // @HasMany(() => Payment)
-  // payment: Payment[]
+  @HasMany(() => Appointment)
+  appointmens: Appointment[];
 }

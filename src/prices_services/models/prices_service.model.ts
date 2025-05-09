@@ -42,11 +42,12 @@ export class PricesService extends Model<PricesService, IPriceCreationAttr> {
   })
   declare price: number;
 
-  // @ForeignKey(() => Payment)
+  @ForeignKey(()=>Payment)
   @Column({
     type: DataType.INTEGER,
   })
   declare payment_id: number;
-  // @BelongsTo(() => Payment)
-  // payment: Payment;
+
+  @BelongsTo(()=>Payment)
+  payment2: Payment
 }

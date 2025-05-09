@@ -24,14 +24,12 @@ export class LabTest extends Model<LabTest, ILabtestCreationAttr> {
   })
   declare id: number;
 
-  @ForeignKey(() => Patient)
+  @ForeignKey(()=>Patient)
   @Column({
     type: DataType.INTEGER,
     allowNull: false,
   })
   declare patient_id: number;
-  @BelongsTo(() => Patient)
-  patient: Patient;
 
   @Column({
     type: DataType.STRING,
@@ -50,4 +48,7 @@ export class LabTest extends Model<LabTest, ILabtestCreationAttr> {
     allowNull: false,
   })
   declare result_patient: string;
+
+  @BelongsTo(()=>Patient)
+  patient: Patient[]
 }

@@ -55,4 +55,7 @@ export class CreatePatientDto {
 
   @IsStrongPassword()
   password: string;
+  
+  @IsString()
+  confirm_password: string;
 }

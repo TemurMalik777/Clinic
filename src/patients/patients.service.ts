@@ -22,11 +22,15 @@ export class PatientsService {
 
     const patientWithHashedPassword = {
       ...createPatientDto,
-      password: hashedPassword,
+      hashed_password: hashedPassword,
     };
 
     const patient = await this.patientModule.create(patientWithHashedPassword);
     return patient;
+  }
+
+  findPatientByEmail(email: string) {
+    return this.patientModule.findOne({ where: { email } });
   }
 
   async findAll(): Promise<Patient[]> {
@@ -67,6 +71,14 @@ export class PatientsService {
     return deleted > 0 ? "Patient o'chirildi" : 'Bunday patient mavjud emas';
   }
 
+  async updateRefreshToken(id: number, hashed_refresh_token: string) {
+    const updatePatient = await this.patientModule.update(
+      { hashed_refresh_token },
+      { where: { id } }
+    );
+    return updatePatient;
+  }
+
   // patients.service.ts
   async updatePatientsPassword(
     id: number,
@@ -75,11 +87,11 @@ export class PatientsService {
     const patient = await this.patientModule.findByPk(id);
     if (!patient) throw new NotFoundException('Patient topilmadi');
 
-    const isMatch = await bcrypt.compare(dto.oldPassword, patient.password);
+    const isMatch = await bcrypt.compare(dto.oldPassword, patient.hashed_password);
     if (!isMatch) throw new BadRequestException('Eski parol notogri');
 
     const hashedNewPassword = await bcrypt.hash(dto.newPassword, 7);
-    patient.password = hashedNewPassword;
+    patient.hashed_password = hashedNewPassword;
     await patient.save();
 
     return 'Parol muvaffaqiyatli yangilandi';

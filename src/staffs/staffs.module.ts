@@ -8,5 +8,6 @@ import { Staff } from './models/staff.model';
   imports: [SequelizeModule.forFeature([Staff])],
   controllers: [StaffsController],
   providers: [StaffsService],
+  exports: [StaffsService]
 })
 export class StaffsModule {}
