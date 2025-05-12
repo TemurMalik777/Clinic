@@ -4,8 +4,7 @@ interface IAdminCreationAttr {
   username: string;
   email: string;
   phone_number: string;
-  password: string;
-  is_active: boolean;
+  hashed_password: string
 }
 
 @Table({ tableName: 'admin' })
@@ -39,10 +38,23 @@ export class Admin extends Model<Admin, IAdminCreationAttr> {
     type: DataType.STRING,
     allowNull: true,
   })
-  declare password: string;
+  declare hashed_password: string;
+
+  @Column({
+    type: DataType.STRING,
+    allowNull: true,
+  })
+  declare hashed_refresh_token: string;
 
   @Column({
     type: DataType.BOOLEAN,
+    defaultValue: false
+  })
+  declare is_creater: boolean
+
+  @Column({
+    type: DataType.BOOLEAN,
+    defaultValue: false
   })
   declare is_active: boolean;
 }

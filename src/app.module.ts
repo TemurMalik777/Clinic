@@ -27,6 +27,8 @@ import { Patient } from './patients/models/patient.model';
 import { DoctorsModule } from './doctors/doctors.module';
 import { Doctor } from './doctors/models/doctor.model';
 import { AuthModule } from './auth/auth.module';
+import { MailModule } from './mail/mail.module';
+import { ClinicModule } from './clinic/clinic.module';
 
 @Module({
   imports: [
@@ -71,6 +73,8 @@ import { AuthModule } from './auth/auth.module';
     PatientsModule,
     DoctorsModule,
     AuthModule,
+    MailModule,
+    ClinicModule
   ],
   controllers: [],
   providers: [],

@@ -26,7 +26,7 @@ export class AuthService {
       id: patient.id,
       email: patient.email,
       isActive: patient.is_active,
-      password: patient.hashed_password,
+      role: patient.role,
     };
 
     const [accessToken, refreshToken] = await Promise.all([

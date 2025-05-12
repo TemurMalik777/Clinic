@@ -26,7 +26,7 @@ export class DocAuthService {
       id: doctor.id,
       email: doctor.email,
       isActive: doctor.is_active,
-      password: doctor.hashed_password,
+      role: doctor.role,
     };
 
     const [accessToken, refreshToken] = await Promise.all([

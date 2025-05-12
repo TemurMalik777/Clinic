@@ -36,7 +36,7 @@ export class LabTestsService {
     });
 
     if (deleted > 0) {
-      return "LabTest o'chirildi";
+      return `${id}-LabTest o'chirildi`;
     }
     return 'Bunday LabTest mavjud emas';
   }

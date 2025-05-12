@@ -17,6 +17,12 @@ export class AppointmentsService {
     return appointment;
   }
 
+  // async findByDoctorId(doctorId: number): Promise<Appointment[]> {
+  //   return this.appoinmtentsModule.findAll({
+  //     where: { doctor_id: doctorId }, // doctor_id deb yozish kerak
+  //   });
+  // }
+
   async findAll() {
     return this.appoinmtentsModule.findAll({ include: { all: true } });
   }

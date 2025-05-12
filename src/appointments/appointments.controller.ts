@@ -6,12 +6,17 @@ import {
   Patch,
   Param,
   Delete,
+  UseGuards,
+  Req,
+  BadRequestException,
 } from '@nestjs/common';
 import { AppointmentsService } from './appointments.service';
 import { CreateAppointmentDto } from './dto/create-appointment.dto';
 import { UpdateAppointmentDto } from './dto/update-appointment.dto';
 import { ApiOperation, ApiResponse, ApiTags, ApiParam } from '@nestjs/swagger';
 import { Appointment } from './models/appointment.model';
+import { AuthGuard } from '../common/guard/auth.guard';
+import { DoctorGuard } from '../common/guard/doctor.guard';
 
 @ApiTags('Appointments - Uchrashuvlar')
 @Controller('appointments')
@@ -77,4 +82,23 @@ export class AppointmentsController {
   remove(@Param('id') id: string) {
     return this.appointmentsService.remove(+id);
   }
+
+  // @ApiOperation({ summary: 'Doctor o‘ziga tegishli appointmentlarni ko‘rish' })
+  // @ApiResponse({
+  //   status: 200,
+  //   description: 'Doctor appointmentlari',
+  //   type: [Appointment],
+  // })
+  // @UseGuards(AuthGuard, DoctorGuard)
+  // @Get('my-appointments')
+  // async findMyAppointments(@Req() req) {
+  //   const doctorId = req.user.id;
+
+  //   // doctorId ning to‘g‘ri raqam ekanligini tekshiramiz
+  //   if (isNaN(doctorId) || !doctorId) {
+  //     throw new BadRequestException('Noto‘g‘ri doctor ID');
+  //   }
+
+  //   return this.appointmentsService.findByDoctorId(doctorId);
+  // }
 }

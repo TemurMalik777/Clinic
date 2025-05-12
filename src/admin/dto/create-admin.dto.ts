@@ -32,12 +32,15 @@ export class CreateAdminDto {
     description: 'Password of the admin',
   })
   @IsString()
-  password: string;
+  hashed_password: string;
 
-  @ApiProperty({
-    example: true,
-    description: 'Whether the admin is active or not',
-  })
-  @IsBoolean()
-  is_active: boolean;
+  // @ApiProperty({
+  //   example: true,
+  //   description: 'Whether the admin is active or not',
+  // })
+  // @IsBoolean()
+  // is_active: boolean;
+
+  // @IsBoolean()
+  // is_creater: boolean
 }

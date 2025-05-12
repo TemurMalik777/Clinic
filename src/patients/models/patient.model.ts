@@ -14,9 +14,9 @@ interface IPatientsCreationAttr {
   gender: 'male' | 'female';
   email: string;
   phone_number: string;
-  is_active: string;
   boold_type: 'A+' | 'A-' | 'B+' | 'B-' | 'AB+' | 'AB-' | 'O+' | 'O-';
   hashed_password: string;
+  role: string
 }
 
 @Table({ tableName: 'patients' })
@@ -76,9 +76,10 @@ export class Patient extends Model<Patient, IPatientsCreationAttr> {
   declare phone_number: string;
 
   @Column({
-    type: DataType.STRING,
+    type: DataType.BOOLEAN,
+    defaultValue: false
   })
-  declare is_active: string;
+  declare is_active: boolean;
 
   @Column({
     type: DataType.ENUM('A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'),
@@ -103,8 +104,14 @@ export class Patient extends Model<Patient, IPatientsCreationAttr> {
 
   @Column({
     type: DataType.STRING,
+    defaultValue: DataType.UUIDV4()
   })
   declare active_link: string;
+
+  @Column({
+    type: DataType.STRING,
+  })
+  declare role: string;
 
   @HasMany(() => Payment)
   payments: Payment[];

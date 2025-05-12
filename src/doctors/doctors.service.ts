@@ -1,4 +1,8 @@
-import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { CreateDoctorDto } from './dto/create-doctor.dto';
 import { UpdateDoctorDto } from './dto/update-doctor.dto';
@@ -73,7 +77,10 @@ export class DoctorsService {
     const doctor = await this.doctorModel.findByPk(id);
     if (!doctor) throw new NotFoundException('Doctor topilmadi');
 
-    const isMatch = await bcrypt.compare(dto.oldPassword, doctor.hashed_password);
+    const isMatch = await bcrypt.compare(
+      dto.oldPassword,
+      doctor.hashed_password,
+    );
     if (!isMatch) throw new BadRequestException('Eski parol noto‘g‘ri');
 
     const hashedNewPassword = await bcrypt.hash(dto.newPassword, 7);

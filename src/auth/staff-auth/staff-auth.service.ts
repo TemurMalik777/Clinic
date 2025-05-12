@@ -26,7 +26,7 @@ export class StaffAuthService {
       id: staff.id,
       email: staff.email,
       isActive: staff.is_active,
-      password: staff.hashed_password,
+      role: staff.role,
     };
 
     const [accessToken, refreshToken] = await Promise.all([
@@ -55,7 +55,7 @@ export class StaffAuthService {
 
     const newStaff = await this.staffService.createStaff(createStaffDto); // ✅
     console.log(newStaff);
-    
+
     return { message: "Foydalanuvchi qo'shildi", staffId: newStaff.id };
   }
 

@@ -47,9 +47,6 @@ export class CreatePatientDto {
   @IsPhoneNumber('UZ')
   phone_number: string;
 
-  @IsString()
-  is_active: string;
-
   @IsEnum(BooldType)
   boold_type: BooldType;
 
@@ -58,4 +55,7 @@ export class CreatePatientDto {
   
   @IsString()
   confirm_password: string;
+
+  @IsString()
+  role: string
 }

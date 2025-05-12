@@ -22,7 +22,7 @@ interface IDoctorsCreationAttr {
   gender: 'male' | 'female';
   experience_years: number;
   status: 'active' | 'inactive';
-  is_active: string;
+  role: string;
 }
 
 @Table({ tableName: 'doctors' })
@@ -94,6 +94,7 @@ export class Doctor extends Model<Doctor, IDoctorsCreationAttr> {
 
   @Column({
     type: DataType.STRING,
+    defaultValue: false
   })
   declare is_active: string;
 
@@ -101,6 +102,11 @@ export class Doctor extends Model<Doctor, IDoctorsCreationAttr> {
     type: DataType.STRING,
   })
   declare refresh_token: string;
+
+  @Column({
+    type: DataType.STRING,
+  })
+  declare role: string;
 
   @HasMany(() => Prescription)
   prescription: Prescription[];

@@ -67,12 +67,15 @@ export class CreateDoctorDto {
   @IsString()
   profile_image_url: string;
 
-  @ApiProperty({ example: 'true' })
-  @IsString()
-  is_active: string;
+  // @ApiProperty({ example: 'true' })
+  // @IsString()
+  // is_active: string;
 
   @ApiPropertyOptional({ example: 'refresh_token_example_here' })
   @IsOptional()
   @IsString()
   refresh_token: string;
+
+  @IsString()
+  role: string;
 }
